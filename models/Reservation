@@ -1,0 +1,29 @@
+const mongoose = require('mongoose');
+
+const reservationSchema = new mongoose.Schema({
+    idUtilisateur: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
+    idSalle: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Salle',
+        required: true
+    },
+    dateDebut: {
+        type: Date,
+        required: true
+    },
+    dateFin: {
+        type: Date,
+        required: true
+    },
+    statut: {
+        type: String,
+        enum: ['confirmée', 'annulée', 'en attente'],
+        default: 'en attente'
+    }
+});
+
+module.exports = mongoose.model('Reservation', reservationSchema);
